@@ -1,0 +1,18 @@
+{
+  "name": "word-counter-input",
+  "description": "Input engine for word-counter",
+  "parallelism": 1,
+  "perTaskCores": 0.1,
+  "perTaskRam": 64,
+  "coordinationService": "zookeeper-word-counter-service",
+  "performanceReportingInterval": 10000,
+  "checkpointMode": "every-nth",
+  "checkpointInterval": 100,
+  "outputs": [
+    "word-counter-lines"
+  ],
+  "lookupHistory": 100,
+  "queueMaxSize": 100,
+  "defaultEvictionPolicy": "LRU",
+  "evictionPolicy": "expanded-time"
+}

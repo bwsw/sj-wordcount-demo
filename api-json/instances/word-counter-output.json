@@ -1,0 +1,14 @@
+{
+  "name": "word-counter-output",
+  "description": "Output engine for word-counter",
+  "parallelism": 1,
+  "perTaskCores": 0.1,
+  "perTaskRam": 64,
+  "coordinationService": "zookeeper-word-counter-service",
+  "performanceReportingInterval": 10000,
+  "checkpointMode": "every-nth",
+  "checkpointInterval": 100,
+  "input": "word-counter-words",
+  "output": "word-counter-jdbc-out",
+  "startFrom": "oldest"
+}

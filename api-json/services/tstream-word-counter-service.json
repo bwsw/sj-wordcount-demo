@@ -1,0 +1,11 @@
+{
+  "type": "TstrQ",
+  "name": "tstream-word-counter-service",
+  "description": "Tstream service for word counter",
+  "metadataProvider": "cassandra-word-counter-provider",
+  "metadataNamespace": "word_counter",
+  "dataProvider": "cassandra-word-counter-provider",
+  "dataNamespace": "word_counter",
+  "lockProvider": "zookeeper-word-counter-provider",
+  "lockNamespace": "word_counter"
+}

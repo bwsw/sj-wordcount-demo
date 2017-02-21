@@ -1,0 +1,8 @@
+{
+  "type": "JDBC",
+  "name": "jdbc-word-counter-service",
+  "description": "JDBC service for word counter",
+  "provider": "jdbc-word-counter-provider",
+  "database": "test",
+  "driver": "mysql"
+}

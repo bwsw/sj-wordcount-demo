@@ -1,0 +1,19 @@
+{
+  "name": "word-counter-process",
+  "description": "Process engine for word-counter",
+  "parallelism": 1,
+  "perTaskCores": 0.1,
+  "perTaskRam": 64,
+  "coordinationService": "zookeeper-word-counter-service",
+  "performanceReportingInterval": 10000,
+  "checkpointMode": "every-nth",
+  "checkpointInterval": 100,
+  "inputs": [
+    "word-counter-lines/split"
+  ],
+  "outputs": [
+    "word-counter-words"
+  ],
+  "startFrom": "oldest",
+  "eventWaitTime": 1000
+}

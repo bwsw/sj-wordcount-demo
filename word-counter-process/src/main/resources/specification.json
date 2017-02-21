@@ -1,0 +1,30 @@
+{
+  "name": "word-counter-process",
+  "description": "Process module by BW for word counter",
+  "version": "1.0",
+  "author": "Pavel Tomskikh",
+  "license": "Apache 2.0",
+  "inputs": {
+    "cardinality": [
+      1,
+      10
+    ],
+    "types": [
+      "stream.t-stream"
+    ]
+  },
+  "outputs": {
+    "cardinality": [
+      1,
+      10
+    ],
+    "types": [
+      "stream.t-stream"
+    ]
+  },
+  "module-type": "regular-streaming",
+  "engine-name": "com.bwsw.regular.streaming.engine",
+  "engine-version": "1.0",
+  "validator-class": "com.bwsw.sj.examples.word_counter.module.process.Validator",
+  "executor-class": "com.bwsw.sj.examples.word_counter.module.process.Executor"
+}

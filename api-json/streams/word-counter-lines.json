@@ -1,0 +1,14 @@
+{
+  "name": "word-counter-lines",
+  "description": "Tstream for separated lines in word counter",
+  "service": "tstream-word-counter-service",
+  "tags": [
+    "word-counter",
+    "lines"
+  ],
+  "type": "stream.t-stream",
+  "partitions": 1,
+  "generator": {
+    "generatorType": "local"
+  }
+}

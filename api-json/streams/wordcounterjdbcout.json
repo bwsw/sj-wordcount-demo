@@ -1,0 +1,11 @@
+{
+  "name": "wordcounterjdbcout",
+  "description": "JDBC output for word counter",
+  "service": "jdbc-word-counter-service",
+  "tags": [
+    "word-counter",
+    "output"
+  ],
+  "type": "jdbc-output",
+  "primary": "id"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "CassDB",
+  "name": "cassandra-word-counter-service",
+  "description": "Cassandra service for word-counter",
+  "keyspace": "word_counter",
+  "provider": "cassandra-word-counter-provider"
+}

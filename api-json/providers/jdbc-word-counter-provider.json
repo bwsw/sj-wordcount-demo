@@ -1,0 +1,10 @@
+{
+  "name": "jdbc-word-counter-provider",
+  "description": "JDBC provider for word counter",
+  "hosts": [
+    "192.168.1.228:3306"
+  ],
+  "login": "admin",
+  "password": "admin",
+  "type": "JDBC"
+}

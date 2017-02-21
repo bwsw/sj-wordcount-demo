@@ -1,0 +1,14 @@
+{
+  "name": "word-counter-words",
+  "description": "Tstream for counted words in word counter",
+  "service": "tstream-word-counter-service",
+  "tags": [
+    "word-counter",
+    "words"
+  ],
+  "type": "stream.t-stream",
+  "partitions": 1,
+  "generator": {
+    "generatorType": "local"
+  }
+}

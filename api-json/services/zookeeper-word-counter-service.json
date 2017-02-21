@@ -1,0 +1,7 @@
+{
+  "name": "zookeeper-word-counter-service",
+  "description": "Zookeeper service for word counter",
+  "provider": "zookeeper-word-counter-provider",
+  "namespace": "word_counter",
+  "type": "ZKCoord"
+}

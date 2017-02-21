@@ -1,0 +1,8 @@
+{
+  "name": "zookeeper-word-counter-provider",
+  "description": "Zookeeper provider for word counter",
+  "type": "zookeeper",
+  "hosts": [
+    "zookeeper-2181.service.consul:2181"
+  ]
+}
