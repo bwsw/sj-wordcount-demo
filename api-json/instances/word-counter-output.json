@@ -9,6 +9,6 @@
   "checkpointMode": "every-nth",
   "checkpointInterval": 100,
   "input": "word-counter-words",
-  "output": "word-counter-jdbc-out",
+  "output": "wordcounterjdbcout",
   "startFrom": "oldest"
 }
