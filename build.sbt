@@ -14,8 +14,12 @@ val commonSettings = Seq(
     "-feature"
   ),
 
+  resolvers += "Sonatype OSS" at "https://oss.sonatype.org/service/local/staging/deploy/maven2",
   resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
-  libraryDependencies ++= Seq("com.bwsw" %% "sj-engine-core" % "1.0-SNAPSHOT"),
+  libraryDependencies ++= Seq(
+    "com.bwsw" %% "sj-engine-core" % "1.0-SNAPSHOT",
+    "mysql" % "mysql-connector-java" % "6.0.5"
+  ),
 
   assemblyMergeStrategy in assembly := {
     case PathList("org", "apache", "commons", "logging", xs@_*) => MergeStrategy.first
