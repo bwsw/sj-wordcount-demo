@@ -11,28 +11,27 @@ import com.bwsw.sj.examples.word_counter.entities.WordsCount
   *
   * @author Pavel Tomskikh
   */
-class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecutor(manager) {
+class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecutor[Array[Byte]](manager) {
 
   val inputStreamName = "word-counter-lines"
   val outputStreamName = "word-counter-words"
   val jsonSerializer = new JsonSerializer()
   val objectSerializer = new ObjectSerializer()
 
-  override def onMessage(envelope: Envelope): Unit = {
-    println(s"onMessage: ${envelope.stream}")
-    envelope match {
-      case tstreamEnvelope: TStreamEnvelope =>
-        val output = manager.getRoundRobinOutput(outputStreamName)
-        tstreamEnvelope.data.foreach { rawLine =>
-          val line = new String(rawLine)
-          val count = line.split("\\s+").length
-          val wordsCount = WordsCount(line, count)
-          val serialized = objectSerializer.serialize(jsonSerializer.serialize(wordsCount))
+  override def onMessage(tstreamEnvelope: TStreamEnvelope[Array[Byte]]): Unit = {
+    println(s"onMessage: ${tstreamEnvelope.stream}")
+    val output = manager.getRoundRobinOutput(outputStreamName)
+    tstreamEnvelope.data.foreach { rawLine =>
+      val line = new String(rawLine)
+      val count = line.split("\\s+").count(_ != "")
+      val wordsCount = WordsCount(line, count)
+      val serialized = objectSerializer.serialize(jsonSerializer.serialize(wordsCount))
 
-          println(s"\t $wordsCount, $line")
+      println(s"\t $wordsCount, $line")
 
-          output.put(serialized)
-        }
+      output.put(serialized)
     }
   }
+
+  override def onAfterCheckpoint(): Unit = println("checkpoint")
 }
