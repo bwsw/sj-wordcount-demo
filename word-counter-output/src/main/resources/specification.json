@@ -26,5 +26,6 @@
   "engine-name": "com.bwsw.output.streaming.engine",
   "engine-version": "1.0",
   "validator-class": "com.bwsw.sj.examples.word_counter.module.output.Validator",
-  "executor-class": "com.bwsw.sj.examples.word_counter.module.output.Executor"
+  "executor-class": "com.bwsw.sj.examples.word_counter.module.output.Executor",
+  "entity-class": "com.bwsw.sj.examples.word_counter.module.output.data.JdbcData"
 }
