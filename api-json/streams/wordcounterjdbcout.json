@@ -7,5 +7,5 @@
     "output"
   ],
   "type": "jdbc-output",
-  "primary": "id"
+  "primary": "test"
 }
