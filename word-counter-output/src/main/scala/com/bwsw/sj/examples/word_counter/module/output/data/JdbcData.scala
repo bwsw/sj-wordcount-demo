@@ -8,6 +8,6 @@ import com.bwsw.sj.engine.core.entities.JdbcEnvelope
   */
 class JdbcData extends JdbcEnvelope {
   var count: Int = 0
-  var string: String = ""
-  var test: String = ""
+  var word: String = ""
+  var test: String = "" // primary key
 }

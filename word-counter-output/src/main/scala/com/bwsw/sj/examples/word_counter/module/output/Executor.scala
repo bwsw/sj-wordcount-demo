@@ -1,10 +1,9 @@
 package com.bwsw.sj.examples.word_counter.module.output
 
-import com.bwsw.common.{JsonSerializer, ObjectSerializer}
 import com.bwsw.sj.engine.core.entities.{Envelope, TStreamEnvelope}
 import com.bwsw.sj.engine.core.environment.OutputEnvironmentManager
 import com.bwsw.sj.engine.core.output.OutputStreamingExecutor
-import com.bwsw.sj.examples.word_counter.entities.WordsCount
+import com.bwsw.sj.examples.word_counter.entities.WordCount
 import com.bwsw.sj.examples.word_counter.module.output.data.JdbcData
 
 /**
@@ -12,22 +11,16 @@ import com.bwsw.sj.examples.word_counter.module.output.data.JdbcData
   *
   * @author Pavel Tomskikh
   */
-class Executor(manager: OutputEnvironmentManager)
-  extends OutputStreamingExecutor[Array[Byte]](manager) {
+class Executor(manager: OutputEnvironmentManager) extends OutputStreamingExecutor[WordCount](manager) {
 
-  val jsonSerializer = new JsonSerializer()
-  val objectSerializer = new ObjectSerializer()
-
-  override def onMessage(envelope: TStreamEnvelope[Array[Byte]]): List[Envelope] = {
+  override def onMessage(envelope: TStreamEnvelope[WordCount]): List[Envelope] = {
     println(s"onMessage: ${envelope.stream}, ${envelope.data.length}")
-    envelope.data.map { data =>
-      val wordsCount = jsonSerializer.deserialize[WordsCount](
-        objectSerializer.deserialize(data).asInstanceOf[String])
+    envelope.data.map { wordCount =>
       val jdbcData = new JdbcData
-      jdbcData.count = wordsCount.count
-      jdbcData.string = wordsCount.string
+      jdbcData.count = wordCount.count
+      jdbcData.word = wordCount.word
 
-      println(s"\t${wordsCount.count}, ${wordsCount.string}")
+      println(s"\t${wordCount.count}, ${wordCount.word}")
 
       jdbcData
     }

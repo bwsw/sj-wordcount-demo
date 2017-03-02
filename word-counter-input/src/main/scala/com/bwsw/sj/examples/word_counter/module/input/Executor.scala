@@ -10,7 +10,7 @@ import io.netty.buffer.ByteBuf
   *
   * @author Pavel Tomskikh
   */
-class Executor(manager: InputEnvironmentManager) extends InputStreamingExecutor[Array[Byte]](manager) {
+class Executor(manager: InputEnvironmentManager) extends InputStreamingExecutor[String](manager) {
 
   val wordCounterStream = "word-counter-lines"
   val partition = 0
@@ -25,20 +25,20 @@ class Executor(manager: InputEnvironmentManager) extends InputStreamingExecutor[
     else None
   }
 
-  override def parse(buffer: ByteBuf, interval: Interval): Option[InputEnvelope[Array[Byte]]] = {
+  override def parse(buffer: ByteBuf, interval: Interval): Option[InputEnvelope[String]] = {
     val length = interval.finalValue - interval.initialValue
     val dataBuffer = buffer.slice(interval.initialValue, length)
     val data = new Array[Byte](length)
     dataBuffer.getBytes(0, data)
     buffer.readerIndex(interval.finalValue + 1)
-    val key = new String(data)
-    println(s"parse: ${interval.initialValue}, ${interval.finalValue}, $key")
+    val line = new String(data)
+    println(s"parse: ${interval.initialValue}, ${interval.finalValue}, $line")
 
     Some(new InputEnvelope(
-      key,
+      line,
       Array((wordCounterStream, partition)),
       false,
-      data))
+      line))
   }
 }
 

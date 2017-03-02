@@ -1,22 +1,19 @@
 package com.bwsw.sj.examples.word_counter.module.process
 
-import com.bwsw.common.{JsonSerializer, ObjectSerializer}
 import com.bwsw.sj.engine.core.entities.TStreamEnvelope
 import com.bwsw.sj.engine.core.environment.ModuleEnvironmentManager
 import com.bwsw.sj.engine.core.regular.RegularStreamingExecutor
-import com.bwsw.sj.examples.word_counter.entities.WordsCount
+import com.bwsw.sj.examples.word_counter.entities.WordCount
 
 /**
   * Executor for regular module.
   *
   * @author Pavel Tomskikh
   */
-class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecutor[Array[Byte]](manager) {
+class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecutor[String](manager) {
 
   val inputStreamName = "word-counter-lines"
   val outputStreamName = "word-counter-words"
-  val jsonSerializer = new JsonSerializer()
-  val objectSerializer = new ObjectSerializer()
   val state = manager.getState
 
   override def onInit(): Unit = {
@@ -25,11 +22,10 @@ class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecut
     println("\tdone")
   }
 
-  override def onMessage(tstreamEnvelope: TStreamEnvelope[Array[Byte]]): Unit = {
+  override def onMessage(tstreamEnvelope: TStreamEnvelope[String]): Unit = {
     println(s"onMessage: ${tstreamEnvelope.stream}")
 
-    tstreamEnvelope.data.foreach { rawLine =>
-      val line = new String(rawLine)
+    tstreamEnvelope.data.foreach { line =>
       val words = line.split("\\s+").filter(_ != "")
       words.foreach { word =>
         println(s"\t$word")
@@ -48,9 +44,8 @@ class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecut
     state.getAll.foreach {
       case (w: String, c: Int) =>
         println(s"\t$w, $c")
-        val wordsCount = WordsCount(w, c)
-        val serialized = objectSerializer.serialize(jsonSerializer.serialize(wordsCount))
-        output.put(serialized)
+        val wordCount = WordCount(w, c)
+        output.put(wordCount)
       case _ =>
     }
     println("\tdone")
